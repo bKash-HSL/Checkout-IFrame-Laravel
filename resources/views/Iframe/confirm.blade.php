@@ -67,23 +67,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>bKash Refund</h1>
-        <form action="{{ route('bkash-refund') }}" method="POST">
+        <h1>bKash Payment</h1>
+        <form action="{{ route('bkash-payment') }}" method="GET">
             @csrf
-            <label for="paymentID">Payment ID</label>
-            <input type="text" id="paymentID" name="paymentID" required>
-            
-            <label for="trxID">Trx ID</label>
-            <input type="text" id="trxID" name="trxID" required>
-            
             <label for="amount">Amount</label>
             <input type="text" id="amount" name="amount" required>
             
-            <input type="submit" value="Submit">
+            <input type="submit" value="Confirm">
         </form>
-        @if(isset($response))
-           <div class="response">{{ $response }}</div>
-        @endif
+
     </div>
 </body>
 </html>

@@ -8,34 +8,43 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
         }
 
-        .center-align {
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
             text-align: center;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
         }
 
         h1 {
-            color: #333;
-            font-size: 24px;
-            margin-top: 0;
+            color: #e74c3c;
         }
 
-        .error-message {
-            color: red;
-            font-size: 18px;
-            margin-top: 20px;
+        p {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .response {
+            color: #e74c3c;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="center-align">
-        <h1>Payment Failed</h1>
-    </div>
-    <br><br>
-    <div class="center-align error-message">
-        @if(isset($errorMessage))
-           {{ $errorMessage }}
-        @endif
+    <div class="container">
+        <h1>Sorry!! Please try again later.</h1>
+        <p>
+            @if(isset($response))
+                <span class="response">{{ $response }}</span>
+            @endif
+        </p>
     </div>
 </body>
 </html>

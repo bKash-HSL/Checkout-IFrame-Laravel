@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     {{-- Sandbox Bkash Js Link --}}
-    {{-- <script src="https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js"></script> --}}
+    <script src="https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js"></script>
     {{-- Live Bkash Js Link --}}
-    <script src="https://scripts.pay.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout.js"></script>
+    {{-- <script src="https://scripts.pay.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout.js"></script> --}}
    
     <title>bKash Payment</title>
     <style>
@@ -31,10 +31,8 @@
     </style>
 </head>
 <body>
+  <input type="hidden" id="amount" name="amount" value="{{ $amount }}">
   <div class="image-button-container">
-    <input type="hidden" id="amount" name="amount" value="{{ $amount }}"><br><br>
-    {{-- <button type="button" id="bKash_button"><img src="{{ asset('payment.png') }}" alt="Example Image"></button> --}}
-
     <button class="image-button" id="bKash_button">
       <img src="{{ asset('payment.png') }}" alt="Example Image">
   </button>
@@ -60,9 +58,8 @@
               data: JSON.stringify(request),
               contentType: 'application/json',
               success: function(data) {
-                console.log(data);
                 data = JSON.parse(data);
-               // console.log(data);
+                console.log(data)
                 if (data && data.paymentID != null) {
                   paymentID = data.paymentID;
                   bKash.create().onSuccess(data); //pass the whole response data in bKash.create().onSucess() method as a parameter
@@ -87,10 +84,9 @@
               success: function(data) {
                 data = JSON.parse(data);
                 if (data && data.paymentID != null) {
-                  console.log("trxID: ",data.trxID)
                    window.location.href = '{{ route('bkash-success') }}'; // Your redirect route when successful payment
                 } else {
-                    console.log("error ");
+                    console.log(data.statusMessage);
                     window.location.href = '{{ route('bkash-fail') }}'; // Your redirect route when fail payment
                     bKash.execute().onError();
                 }
